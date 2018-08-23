@@ -13,7 +13,15 @@
     "term": "xterm-color",
     "readyTimeout": 20000,
     "keepaliveInterval": 120000,
-    "keepaliveCountMax": 10
+    "keepaliveCountMax": 10,
+    "serverId": null,
+    "basicHost": "127.0.0.1"
+  },
+  "mysql": {
+    "host"     : "localhost",
+    "user"     : "levon",
+    "password" : "123456",
+    "database" : "ottomatik"
   },
   "terminal": {
     "cursorBlink": true,
