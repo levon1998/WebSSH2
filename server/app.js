@@ -60,8 +60,8 @@ app.get('/ssh/server/:serverId', async function (req, res, next) {
   let rows
   try {
     rows = await mysqlQuery(`SELECT ssh_ip_address as sshIpAddress, ssh_port_number as sshPortNumber, ssh_username as sshUsername FROM servers WHERE id = ?`, [serverId])
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    console.log(err)
   }
 
   res.sendFile(path.join(path.join(publicPath, 'client.htm')))
