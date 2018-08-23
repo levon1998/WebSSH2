@@ -47,6 +47,8 @@ module.exports = function socket (socket) {
       cols: termCols,
       rows: termRows
     }, function connShell (err, stream) {
+      const {sshIpAddress, sshPortNumber, sshUsername} = socket.request.session.ssh.connectionParams
+      stream.write(`ssh ${sshUsername}@${sshIpAddress} -p ${sshPortNumber} \n`)
       if (err) {
         SSHerror('EXEC ERROR' + err)
         conn.end()
