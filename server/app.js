@@ -59,7 +59,7 @@ app.get('/ssh/server/:serverId', async function (req, res, next) {
 
   let rows
   try {
-    rows = await mysqlQuery(`SELECT ssh_ip_address as sshIpAddress, ssh_port_number as sshPortNumber, ssh_username as sshUsername FROM servers WHERE id = ?`, [serverId])
+    rows = await mysqlQuery(`SELECT id, ssh_ip_address as sshIpAddress, ssh_port_number as sshPortNumber, ssh_username as sshUsername, ssh_private_key as privateKey FROM servers WHERE id = ?`, [serverId])
   } catch (err) {
     console.log(err)
   }
