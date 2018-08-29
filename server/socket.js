@@ -47,7 +47,7 @@ module.exports = function socket (socket) {
       cols: termCols,
       rows: termRows
     }, function connShell (err, stream) {
-      const { id, sshIpAddress, sshPortNumber, sshUsername} = socket.request.session.ssh.connectionParams
+      const {id, sshIpAddress, sshPortNumber, sshUsername} = socket.request.session.ssh.connectionParams
 
       stream.write(`
           cd /var/www/html/ottomatik-web/ && php artisan tinker \n 
@@ -62,7 +62,6 @@ module.exports = function socket (socket) {
           ssh -i ssh_keys/ssh_pk_for_${id} ${sshUsername}@${sshIpAddress} -p ${sshPortNumber} \n
           clear \n
       `)
-      // stream.write(`ssh ${sshUsername}@${sshIpAddress} -p ${sshPortNumber} \n`)
       if (err) {
         SSHerror('EXEC ERROR' + err)
         conn.end()
