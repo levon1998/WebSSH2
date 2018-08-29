@@ -100,7 +100,8 @@ app.get('/ssh/server/:serverId', async function (req, res, next) {
     },
     readyTimeout: (validator.isInt(req.query.readyTimeout + '', {min: 1, max: 300000}) &&
       req.query.readyTimeout) || config.ssh.readyTimeout,
-    connectionParams: rows[0]
+    connectionParams: rows[0],
+    ottomatikProjectPath: config.ottomatik_project_path
   }
   if (req.session.ssh.header.name) validator.escape(req.session.ssh.header.name)
   if (req.session.ssh.header.background) validator.escape(req.session.ssh.header.background)

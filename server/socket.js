@@ -50,7 +50,7 @@ module.exports = function socket (socket) {
       const {id, sshIpAddress, sshPortNumber, sshUsername} = socket.request.session.ssh.connectionParams
 
       stream.write(`
-          cd /var/www/html/ottomatik-web/ && php artisan tinker \n 
+          cd ${socket.request.session.ssh.ottomatikProjectPath} && php artisan tinker \n 
           $server = App\\Server::find(${id}); \\n 
           if (!file_exists('ssh_keys')) mkdir('ssh_keys', 0777, true); \n
           $myfile = fopen("ssh_keys/ssh_pk_for_${id}", "w") or die("Unable to open file!"); \n

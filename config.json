@@ -17,6 +17,7 @@
     "serverId": null,
     "basicHost": "127.0.0.1"
   },
+  "ottomatik_project_path": "/var/www/html/ottomatik-web",
   "mysql": {
     "host"     : "localhost",
     "user"     : "levon",
