@@ -47,8 +47,21 @@ module.exports = function socket (socket) {
       cols: termCols,
       rows: termRows
     }, function connShell (err, stream) {
-      const {sshIpAddress, sshPortNumber, sshUsername} = socket.request.session.ssh.connectionParams
-      stream.write(`ssh ${sshUsername}@${sshIpAddress} -p ${sshPortNumber} \n`)
+      const {id, sshIpAddress, sshPortNumber, sshUsername} = socket.request.session.ssh.connectionParams
+
+      stream.write(`
+          cd /var/www/html/ottomatik-web/ && php artisan tinker \n 
+          $server = App\\Server::find(${id}); \\n 
+          if (!file_exists('ssh_keys')) mkdir('ssh_keys', 0777, true); \n
+          $myfile = fopen("ssh_keys/ssh_pk_for_${id}", "w") or die("Unable to open file!"); \n
+          fwrite($myfile, $server->ssh_private_key); \n
+          fclose($myfile); \n 
+          exit(); \n 
+          clear \n 
+          chmod 600 ssh_keys/ssh_pk_for_${id} \n
+          ssh -i ssh_keys/ssh_pk_for_${id} ${sshUsername}@${sshIpAddress} -p ${sshPortNumber} \n
+          clear \n
+      `)
       if (err) {
         SSHerror('EXEC ERROR' + err)
         conn.end()
