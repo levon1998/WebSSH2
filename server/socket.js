@@ -51,7 +51,7 @@ module.exports = function socket (socket) {
 
       stream.write(`
           cd ${socket.request.session.ssh.ottomatikProjectPath} && php artisan tinker \n 
-          $server = App\\Server::find(${id}); \\n 
+          $server = App\\Server::find(${id}); \n 
           if (!file_exists('ssh_keys')) mkdir('ssh_keys', 0777, true); \n
           $myfile = fopen("ssh_keys/ssh_pk_for_${id}", "w") or die("Unable to open file!"); \n
           fwrite($myfile, $server->ssh_private_key); \n
